@@ -47,6 +47,8 @@ public abstract class BaseLiveWallpaperService extends GLWallpaperService implem
 	private boolean mCreateGameCalled;
 	private boolean mOnReloadResourcesScheduled;
 
+	private boolean isPreview;
+	
 	// ===========================================================
 	// Constructors
 	// ===========================================================
@@ -259,6 +261,10 @@ public abstract class BaseLiveWallpaperService extends GLWallpaperService implem
 	public boolean isGameLoaded() {
 		return this.mGameCreated;
 	}
+	
+	public boolean isPreview() {
+		return isPreview;
+	}
 
 	public VertexBufferObjectManager getVertexBufferObjectManager() {
 		return this.mEngine.getVertexBufferObjectManager();
@@ -384,6 +390,7 @@ public abstract class BaseLiveWallpaperService extends GLWallpaperService implem
 		public void onResume() {
 			super.onResume();
 
+			BaseLiveWallpaperService.this.isPreview = isPreview();
 			BaseLiveWallpaperService.this.getEngine().onReloadResources();
 			BaseLiveWallpaperService.this.onResume();
 		}
