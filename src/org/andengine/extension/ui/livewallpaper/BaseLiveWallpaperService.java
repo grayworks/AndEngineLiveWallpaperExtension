@@ -188,7 +188,7 @@ public abstract class BaseLiveWallpaperService extends GLWallpaperService implem
 		this.onResumeGame();
 	}
 
-	protected void onPause(){
+	protected synchronized void onPause(){
 		Debug.d(this.getClass().getSimpleName() + ".onPause" + " @(Thread: '" + Thread.currentThread().getName() + "')");
 
 		if(!this.mGamePaused) {
@@ -197,11 +197,9 @@ public abstract class BaseLiveWallpaperService extends GLWallpaperService implem
 	}
 
 	@Override
-	public void onPauseGame() {
+	public synchronized void onPauseGame() {
 		Debug.d(this.getClass().getSimpleName() + ".onPauseGame" + " @(Thread: '" + Thread.currentThread().getName() + "')");
-
 		this.mGamePaused = true;
-
 		this.mEngine.stop();
 	}
 
